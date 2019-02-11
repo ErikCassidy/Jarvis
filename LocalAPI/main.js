@@ -11,7 +11,6 @@ const incomeStatement = new Excel();
 var values;
 incomeStatement.setup("../Data/Excel.csv").then(()=>{
   values = incomeStatement.getColumnTotals();
-  console.log(values);
 });
 
 subscriber.events.on(Events.MessageReceived, (message)=>{
@@ -21,8 +20,11 @@ subscriber.events.on(Events.MessageReceived, (message)=>{
 
   let revenues = values.Revenue;
   let expenses = values.Expenses;
-  
-  socket.emit(type, {body, revenues, expenses});
+  let typeValue = body.typeValue
+
+  //socket.emit("Revenues", JSON.stringify(revenues));
+  //socket.emit("Expenses", JSON.stringify(expenses));
+  socket.emit("alexa_" + type, typeValue);
 })
 
 subscriber.subscribe("Alexa/*");

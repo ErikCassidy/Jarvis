@@ -6,7 +6,7 @@ io.on("connection", client => {
 });
 
 function emit(eventType, eventArg){
-  console.log("emitting to all clients");
+  console.log("emitting to all clients eventType", eventType);
   io.emit(eventType, eventArg);
 }
 
